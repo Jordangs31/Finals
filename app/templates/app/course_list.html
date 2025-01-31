@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<a href="{% url 'course_create' %}">+ New Course</a>
+<br>
+<form method="get" action="{% url 'course' %}">
+    <label>
+        <input type="text" name="q" placeholder="search for title..." value="{{search_query}}">
+    </label>
+    <button class="s" type="button">Search</button>
+</form>
+<table>
+    <thread>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Instructor</th>
+        <th>Creation Date</th>
+        <th>Added By</th>
+        <th>View</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thread>
+    <tbody>
+    {% for course in courses %}
+        <tr>
+            <td>{{course.title}}</td>
+            <td>{{course.description}}</td>
+            <td>{{course.instructor}}</td>
+            <td>{{course.created_at}}</td>
+            <td>{{course.user}}</td>
+            <td><a href="{% url 'course_detail' course.pk%}">View</a></td>
+            <td><a href="{% url 'course_update' course.pk%}">Update</a></td>
+            <td><a href="{% url 'course_delete' course.pk%}">Delete</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Total</td>
+            <td colspan="1">{{total_courses}}</td>
+            <td>{{total_instructors}}</td>
+            <td>{{total_lessons}}</td>
+            <td>{{total_users}}</td>
+        </tr>
+    </tfoot>
+</table>
+{% endblock content %}

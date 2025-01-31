@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudyHub</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head> 
+<body>
+    {% include 'app/navbar.html' %}
+
+    {% if user.is_authenticated %}
+    <p>Hi {{user.username}}</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
+    {% else %}
+    <p>You are not logged in</p>
+    {% endif %}
+
+    {% block content %}
+        
+    {% endblock content %}
+    <script scr="{% static 'js/base.js' %}"></script>
+
+</body>   
+</html>

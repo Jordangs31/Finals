@@ -1,0 +1,11 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    
+        <div>
+            <h2><a href="">{{course.title}}</a></h2>
+            <p>{{course.description}}</p>
+        </div>
+        <a href="{% url 'course_update' course.pk %}">+ Edit Course</a>
+        <a href="{% url 'course_delete' course.pk %}">+ Delete Course</a>
+{% endblock content %}
